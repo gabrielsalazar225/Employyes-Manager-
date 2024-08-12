@@ -26,7 +26,7 @@ async function mainMenu() {
       'Exit'
     ],
   });
-  //Switch case
+ 
   switch (choice) {
     case 'View all departments':
       await viewAllDepartments();
@@ -65,7 +65,7 @@ async function viewAllDepartments() {
     console.error('Error viewing departments', err);
   }
 }
-//View roles
+
 async function viewAllRoles() {
   try {
     const res = await app.query(`
@@ -78,7 +78,7 @@ async function viewAllRoles() {
     console.error('Error viewing roles', err);
   }
 }
-//View employees
+
 async function viewAllEmployees() {
   try {
     const res = await app.query(`
