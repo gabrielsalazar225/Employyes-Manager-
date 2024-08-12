@@ -1,6 +1,6 @@
 const inquirer = require('inquirer');
 const { Pool } = require('pg');
-// PostgreSQL connection configuration, edit this with your own information in case of testing
+
 const app = new Pool({
   user: 'postgres',
   host: 'localhost',
@@ -9,7 +9,7 @@ const app = new Pool({
   port: 5432,
 });
 
-// MainMenu function
+
 async function mainMenu() {
   const { choice } = await inquirer.prompt({
     name: 'choice',
@@ -56,9 +56,7 @@ async function mainMenu() {
   }
   await mainMenu();
 }
-// View functions starts
-// ---------------------
-//View departments
+
 async function viewAllDepartments() {
   try {
     const res = await app.query('SELECT * FROM departments');
@@ -102,9 +100,7 @@ async function viewAllEmployees() {
     console.error('Error viewing employees', err);
   }
 }
-// Add functions Starts
-// ---------------------
-//Add department
+
 async function addDepartment() {
   const { name } = await inquirer.prompt({
     name: 'name',
@@ -118,7 +114,7 @@ async function addDepartment() {
     console.error('Error adding department', err);
   }
 }
-//Add role
+
 async function addRole() {
   const departments = await app.query('SELECT * FROM departments');
   const { title, salary, departmentId } = await inquirer.prompt([
@@ -147,7 +143,7 @@ async function addRole() {
     console.error('Error adding role', err);
   }
 }
-//Add employee
+
 async function addEmployee() {
   const roles = await app.query('SELECT * FROM roles');
   const employees = await app.query('SELECT * FROM employees');
@@ -185,7 +181,7 @@ async function addEmployee() {
     console.error('Error adding employee', err);
   }
 }
-//Update employee role function
+
 async function updateEmployeeRole() {
   const employees = await app.query('SELECT * FROM employees');
   const roles = await app.query('SELECT * FROM roles');
@@ -210,5 +206,5 @@ async function updateEmployeeRole() {
     console.error('Error updating employee role', err);
   }
 }
-// MainMenu function call, catch error if exist
+
 mainMenu().catch(console.error);
